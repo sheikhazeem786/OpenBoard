@@ -6,10 +6,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        body {
+            margin: 0px;
+        }
+        
+        .fas {
+            font-size: 2rem;
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <h1>Canvas Example</h1>
+    <!-- <h1>Canvas Example</h1> -->
+    <i class="fas fa-square"></i>
+    <i class="fas fa-grip-lines-vertical"></i>
+    <!-- drawing board -->
+    <canvas></canvas>
+
+
 </body>
+<!-- HTML js inject -->
+<script>
+    let canvasBoard = document.querySelector("canvas");
+    let rectTool = document.querySelector(".fa-square");
+    let lineTool = document.querySelector(".fa-grip-lines-vertical");
+    let currTool = "rectTool";
+    // default height width is smaller
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+    // this line gives you tool to draw on canvas
+    let tool = canvasBoard.getContext("2d");
+    let body = document.querySelector("body");
+
+    // tool change logic
+    rectTool.addEventListener("click", function() {
+        currTool = "rectTool";
+    })
+    lineTool.addEventListener("click", function() {
+        currTool = "lineTool";
+    })
+
+    // press on the screen
+    let iX, iY, fX, fY;
+    body.addEventListener("mousedown",
+        function(e) {
+            // alert("mouse was pressed");
+            // console.log(e);
+            // let xPos = e.clientX;
+            // let yPos = e.clientY;
+            // console.log(xPos, yPos)
+            iX = e.clientX;
+            iY = e.clientY;
+        })
+    body.addEventListener("mouseup",
+        function(e) {
+
+            fX = e.clientX;
+            fY = e.clientY;
+            let width = fX - iX;
+            let height = fY - iY;
+            if (currTool == "rectTool") {
+                tool.strokeRect(iX, iY, width, height);
+            } else {
+                console.log("Pencil tool is pending");
+            }
+
+        })
+</script>
 
 </html>

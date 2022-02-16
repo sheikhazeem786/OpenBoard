@@ -1,0 +1,114 @@
+** Link in head for the icons to run:->
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+
+<body>
+    <h1>Canvas Example</h1>
+
+** Icons class from fonawesome.com:->
+    <i class="fas fa-square"></i>
+    <i class="fas fa-grip-lines-vertical"></i>
+** Drawing board tag:->
+    <canvas></canvas>
+
+</body>
+
+** <!-- HTML js inject -->
+<script>
+** Use to fill color in shapes:->
+        tool.fillStyle = "green";
+
+** Use to build rectangle:->
+        tool.fillRect(0, 0, 250, 250);
+
+** Use to make boundry:-> 
+        tool.strokeStyle = "red";
+        boundry is made
+        tool.strokeRect(50, 50, 300, 300);
+    // like a paint, it overlaps
+    
+        
+    let canvasBoard = document.querySelector("canvas");
+
+** Used icon class name in querySelector to select Shapes:->
+    let rectTool = document.querySelector(".fa-square");
+    let lineTool = document.querySelector(".fa-grip-lines-vertical");
+
+** Saved as tool of choice
+    let currTool = "rectTool";
+
+** Default height width is smaller, so we need to manually define height and width
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+
+** This line gives you tool to draw on canvas
+    let tool = canvasBoard.getContext("2d");
+
+
+    let body = document.querySelector("body");
+
+** Tool change logic (Click = mousedown + mouseup):->
+** If clicked on rectangle, then currTool becomes rectTool:->
+    rectTool.addEventListener("click", function() {
+        currTool = "rectTool";
+    })
+** If clicked on line, then currTool becomes lineTool:->    
+    lineTool.addEventListener("click", function() {
+        currTool = "lineTool";
+    })
+
+    // press on the screen
+    let iX, iY, fX, fY;
+    body.addEventListener("mousedown",
+        function(e) {            
+            // alert("mouse was pressed");
+            // console.log(e);
+
+** Get position of click:->
+    let xPos = e.clientX;
+    let yPos = e.clientY;
+    console.log(xPos, yPos)
+
+** Initial X and Initial Y location:->
+    iX = e.clientX;
+    iY = e.clientY;
+        
+        })
+
+
+    body.addEventListener("mouseup",
+        function(e) {
+            // alert("Mouse was lifted");
+            // console.log(e);
+            // let xPos = e.clientX;
+            // let yPos = e.clientY;
+            // console.log(xPos, yPos)
+
+
+            fX = e.clientX;
+            fY = e.clientY;
+
+** To find the width and height for rectangle:->            
+            let width = fX - iX;
+            let height = fY - iY;
+
+** If the clicked choice is rectangle the drwa rectangle
+            if (currTool == "rectTool") {
+                tool.strokeRect(iX, iY, width, height);
+            } 
+
+** else draw line
+            else {
+                console.log("Pencil tool is pending");
+            }
+
+        })
+</script>
+
+
+** Four functions are used to draw anything:->
+    1) beginpath (starts drawing from x,y coordinates)
+    2) moveto (takes xf,yf coordinates to move at destination without drawing)
+    3) lineTo (takes xf,yf coordinates and draw a line)
+    4) stroke (It prduces the effect of all moveTo & lineTo)
