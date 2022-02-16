@@ -73,7 +73,10 @@
             if (currTool == "rectTool") {
                 tool.strokeRect(iX, iY, width, height);
             } else {
-                console.log("Pencil tool is pending");
+                tool.beginPath();
+                tool.moveTo(iX, iY);
+                tool.lineTo(fX, fY);
+                tool.stroke();
             }
 
         })
