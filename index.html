@@ -17,23 +17,61 @@
             margin-right: 30px;
             margin-left: 30px;
         }
+        
+        .red {
+            background-color: lightpink;
+            width: 40px;
+            height: 40px;
+            /* curve */
+            border-radius: 50%;
+        }
+        
+        .green {
+            background-color: lightgreen;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .blue {
+            background-color: lightblue;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .icon-pallet {
+            background-color: lightgray;
+            height: 50px;
+            width: 500px;
+            margin-left: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
     <!-- <h1>Canvas Example</h1> -->
-    <i class="fas fa-square"></i>
-    <i class="fas fa-grip-lines-vertical"></i>
+    <div class="icon-pallet">
+        <i class="fas fa-square"></i>
+        <i class="fas fa-grip-lines-vertical"></i>
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
     <!-- drawing board -->
     <canvas></canvas>
+
 
 
 </body>
 <!-- HTML js inject -->
 <script>
     // to select anything from html we use querySelector
-    //let canvasBoard = document.querySelector("canvas");
+    let canvasBoard = document.querySelector("canvas");
     let rectTool = document.querySelector(".fa-square");
     let lineTool = document.querySelector(".fa-grip-lines-vertical");
     let currTool = "rectTool";
@@ -78,6 +116,24 @@
                 tool.stroke();
             }
 
+        })
+
+    let redColor = document.querySelector(".red");
+    let greenColor = document.querySelector(".green");
+    let blueColor = document.querySelector(".blue");
+
+
+    redColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightpink";
+        })
+    greenColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightgreen";
+        })
+    blueColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightblue";
         })
 </script>
 
