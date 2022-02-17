@@ -1,3 +1,49 @@
+
+                    *** Notes ***
+
+1. <canvas></canvas>
+        Drawing board
+
+2. document.querySelector("")
+        Select any element from html
+3. Change Canvas size 
+    3.1. window.innerHeight
+        Current height of tab of window
+    3.2. window.innerWidth
+        Current width of tab of window
+
+4. getContext("2d)
+        Gives tool to draw anything
+5. Draw Line or rectangle
+    5.1. rect
+        5.1.1. fill -> fill -> fillStyle
+        5.1.2 stroke -> boundry -> strokeStyle
+    5.2. line
+        5.2.1. beginPath -> starts drawing from x,y coordinates
+        5.2.2. moveTo -> takes Xi,Yi coordinates to move at destination without drawing
+        5.2.3. lineTo -> takes Xf,Yf coordinates and draw a line to Xi, Yi
+        5.2.4. stroke -> It prduces the effect of all moveTo & lineTo
+
+6. addEventListener (user input through)
+    6.1. click -> mousedown, mouseup
+    6.2. (e) -> describes everything regarding click
+
+7. getBoundingClientRect() (adjust)
+    top -> vertical distance from top-left corner
+    left -> horizontal distance from top-left corner
+
+
+
+
+
+
+
+
+
+
+
+
+
 ** Link in head for the icons to run:->
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -28,7 +74,7 @@
         tool.strokeRect(50, 50, 300, 300);
     // like a paint, it overlaps
     
-        
+** To select anything from html we use querySelector:->
     let canvasBoard = document.querySelector("canvas");
 
 ** Used icon class name in querySelector to select Shapes:->
@@ -39,8 +85,10 @@
     let currTool = "rectTool";
 
 ** Default height width is smaller, so we need to manually define height and width
-    canvasBoard.height = window.innerHeight;
-    canvasBoard.width = window.innerWidth;
+    ** Current height of tab of window
+        canvasBoard.height = window.innerHeight;
+    ** Current height of tab of window
+        canvasBoard.width = window.innerWidth;
 
 ** This line gives you tool to draw on canvas
     let tool = canvasBoard.getContext("2d");
@@ -49,15 +97,21 @@
     let body = document.querySelector("body");
 
 ** Tool change logic (Click = mousedown + mouseup):->
-** If clicked on rectangle, then currTool becomes rectTool:->
-    rectTool.addEventListener("click", function() {
-        currTool = "rectTool";
-    })
-** If clicked on line, then currTool becomes lineTool:->    
-    lineTool.addEventListener("click", function() {
-        currTool = "lineTool";
-    })
+    ** If clicked on rectangle, then currTool becomes rectTool:->
+        rectTool.addEventListener("click", function() {
+            currTool = "rectTool";
+        })
+    ** If clicked on line, then currTool becomes lineTool:->    
+        lineTool.addEventListener("click", function() {
+            currTool = "lineTool";
+        })
 
+** Gets the insight of canvas and where drawing lacks:->
+** Canvas board -> Top point se kitna neeche hai
+        let boardTop = canvasBoard.getBoundingClientRect().top;
+** Canvas board -> Left point se kitna aage hai
+        let boardLeft = canvasBoard.getBoundingClientRect().left;
+    
     // press on the screen
     let iX, iY, fX, fY;
     body.addEventListener("mousedown",
@@ -70,9 +124,9 @@
     let yPos = e.clientY;
     console.log(xPos, yPos)
 
-** Initial X and Initial Y location:->
-    iX = e.clientX;
-    iY = e.clientY;
+** Initial X and Initial Y location:-> with accuracy
+    iX = e.clientX + boardLeft;
+    iY = e.clientY - boardTop;
         
         })
 
@@ -85,9 +139,9 @@
             // let yPos = e.clientY;
             // console.log(xPos, yPos)
 
-
-            fX = e.clientX;
-            fY = e.clientY;
+** Fianl X and Final Y location:-> with accuracy
+            fX = e.clientX + boardLeft;
+            fY = e.clientY - boardTop;
 
 ** To find the width and height for rectangle:->            
             let width = fX - iX;
@@ -100,7 +154,10 @@
 
 ** else draw line
             else {
-                console.log("Pencil tool is pending");
+                tool.beginPath();
+                tool.moveTo(iX, iY);
+                tool.lineTo(fX, fY);
+                tool.stroke();
             }
 
         })
@@ -109,6 +166,7 @@
 
 ** Four functions are used to draw anything:->
     1) beginpath (starts drawing from x,y coordinates)
-    2) moveto (takes xf,yf coordinates to move at destination without drawing)
-    3) lineTo (takes xf,yf coordinates and draw a line)
+    2) moveto (takes Xi,Yi coordinates to move at destination without drawing)
+    3) lineTo (takes Xf,Yf coordinates and draw a line to Xi, Yi)
     4) stroke (It prduces the effect of all moveTo & lineTo)
+

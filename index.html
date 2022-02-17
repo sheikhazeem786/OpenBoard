@@ -32,7 +32,8 @@
 </body>
 <!-- HTML js inject -->
 <script>
-    let canvasBoard = document.querySelector("canvas");
+    // to select anything from html we use querySelector
+    //let canvasBoard = document.querySelector("canvas");
     let rectTool = document.querySelector(".fa-square");
     let lineTool = document.querySelector(".fa-grip-lines-vertical");
     let currTool = "rectTool";
@@ -48,26 +49,24 @@
         currTool = "rectTool";
     })
     lineTool.addEventListener("click", function() {
-        currTool = "lineTool";
-    })
+            currTool = "lineTool";
+        })
+        // console.log(canvasBoard.getBoundingClientRect());
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
 
     // press on the screen
     let iX, iY, fX, fY;
     body.addEventListener("mousedown",
         function(e) {
-            // alert("mouse was pressed");
-            // console.log(e);
-            // let xPos = e.clientX;
-            // let yPos = e.clientY;
-            // console.log(xPos, yPos)
-            iX = e.clientX;
-            iY = e.clientY;
+            iX = e.clientX + boardLeft;
+            iY = e.clientY - boardTop;
         })
     body.addEventListener("mouseup",
         function(e) {
 
-            fX = e.clientX;
-            fY = e.clientY;
+            fX = e.clientX + boardLeft;
+            fY = e.clientY - boardTop;
             let width = fX - iX;
             let height = fY - iY;
             if (currTool == "rectTool") {
