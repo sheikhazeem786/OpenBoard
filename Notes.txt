@@ -32,6 +32,26 @@
     top -> vertical distance from top-left corner
     left -> horizontal distance from top-left corner
 
+|-----------------*menu.html-------------------------------------------
+|
+|       /* html */
+|   * we have page then,
+|   * first think of toolbar area
+|   * having differernt tools 
+|   * and a group of colors
+|   * all in center
+|   * then made divs depending in thought process
+|   * having container of different colors
+|   * tool -> tool -> tool -> color-container
+|
+|       /* CSS */
+|   * have to justify hozrizontally in center
+|   * the apply width as 90vw->90% view width of screen
+|   * then margin 0 auto -> left-right && top-bottom equal margin
+|   * height coz children should have space for alignment
+|   * if want to change image size then change give height to image directly by creating class over them
+|   * height, width, bordr-radius must be same in every color symbol
+|   * the good practice is to give class to every element.
 
 
 
@@ -43,6 +63,10 @@
 
 
 
+
+
+
+        *** EXTRA ROUGH NOTES ***
 
 ** Link in head for the icons to run:->
     <head>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toolbar {
+            border: 1px solid gray;
+            border-radius: 5px;
+            display: flex;
+            width: 90vw;
+            height: 80px;
+            /* trick to center element */
+            margin: 0 auto;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        
+        .tool {
+            /* border: 1px solid green; */
+            height: 50px;
+        }
+        
+        .tool-img {
+            /* border: 1px solid red; */
+            height: 50px;
+        }
+        
+        .color-container {
+            border: 1px solid gray;
+            border-radius: 3px;
+            display: flex;
+            height: 50px;
+            width: 150px;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        
+        .color {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            /* background-color: aqua; */
+        }
+        
+        .red {
+            background-color: lightpink;
+        }
+        
+        .green {
+            background-color: lightgreen;
+        }
+        
+        .blue {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toolbar">
+        <div class="tool" id="pencil">
+            <img src="./NewIcons/Black_Pencil.svg" alt="" class="tool-img">
+        </div>
+        <div class="tool">
+            <img src="./NewIcons/Eraser.svg" alt="" class="tool-img">
+        </div>
+        <div class="tool">
+            <img src="./NewIcons/Download.svg" alt="" class="tool-img">
+        </div>
+        <div class="tool">
+            <img src="./NewIcons/Photo.svg" alt="" class="tool-img">
+        </div>
+        <div class="color-container">
+            <div class="color red"></div>
+            <div class="color green"></div>
+            <div class="color blue"></div>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>
