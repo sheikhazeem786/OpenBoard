@@ -5,83 +5,207 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .toolbar {
-            border: 1px solid gray;
-            border-radius: 5px;
-            display: flex;
-            width: 90vw;
-            height: 80px;
-            /* trick to center element */
-            margin: 0 auto;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-        
-        .tool {
-            /* border: 1px solid green; */
-            height: 50px;
-        }
-        
-        .tool-img {
-            /* border: 1px solid red; */
-            height: 50px;
-        }
-        
-        .color-container {
-            border: 1px solid gray;
-            border-radius: 3px;
-            display: flex;
-            height: 50px;
-            width: 150px;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-        
-        .color {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            /* background-color: aqua; */
-        }
-        
-        .red {
-            background-color: lightpink;
-        }
-        
-        .green {
-            background-color: lightgreen;
-        }
-        
-        .blue {
-            background-color: lightblue;
-        }
-    </style>
+    <title>Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
     <div class="toolbar">
         <div class="tool" id="pencil">
             <img src="./NewIcons/Black_Pencil.svg" alt="" class="tool-img">
+            <div class="box-size">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
         </div>
-        <div class="tool">
+        <div class="tool" id="eraser">
             <img src="./NewIcons/Eraser.svg" alt="" class="tool-img">
+            <div class="box-size">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
         </div>
-        <div class="tool">
-            <img src="./NewIcons/Download.svg" alt="" class="tool-img">
+        <div class="tool" id="rect">
+            <i class="fas fa-square"></i>
+
+            <div class="box-size">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
         </div>
-        <div class="tool">
-            <img src="./NewIcons/Photo.svg" alt="" class="tool-img">
+        <div class="tool" id="line">
+            <i class="fas fa-grip-lines-vertical"></i>
+            <div class="box-size">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
         </div>
+        <!-- Single unit -->
         <div class="color-container">
             <div class="color red"></div>
             <div class="color green"></div>
             <div class="color blue"></div>
         </div>
     </div>
-
-    </div>
+    <canvas></canvas>
 </body>
+<!-- variable declare -->
+<script>
+    let canvasBoard = document.querySelector("canvas");
+    let body = document.querySelector("body");
+    let tool = canvasBoard.getContext("2d");
+    let currTool = "pencil";
+    let pencil = document.querySelector("#pencil");
+    let eraser = document.querySelector("#eraser ");
+    let rect = document.querySelector("#rect");
+    let line = document.querySelector("#line");
+    let options = document.querySelectorAll(".box-size");
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+</script>
+<!-- call event listener -->
+<script>
+    pencil.addEventListener("click", function(e) {
+        if (currTool == "pencil") {
+            //second click
+            //options show
+            options[0].style.display = "flex";
+        } else {
+            //first click
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.display = "none";
+            }
+            // pencil.style.border = "1px solid red";
+            currTool = "pencil";
+        }
+    })
+    eraser.addEventListener("click", function(e) {
+        if (currTool == "eraser") {
+            //second click
+            //options show
+            options[1].style.display = "flex";
+        } else {
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.display = "none";
+            }
+            //first click
+            // eraser.style.border = "1px solid red";
+            currTool = "eraser";
+        }
+    })
+    rect.addEventListener("click", function(e) {
+        if (currTool == "rect") {
+            //second click
+            //options show
+            options[2].style.display = "flex";
+        } else {
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.display = "none";
+            }
+            //first click
+            // rect.style.border = "1px solid red";
+            currTool = "rect";
+        }
+    })
+    line.addEventListener("click", function(e) {
+        if (currTool == "line") {
+            //second click
+            //options show
+            options[3].style.display = "flex";
+        } else {
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.display = "none";
+            }
+            // line.style.border = "1px solid red";
+            //first click
+            currTool = "line";
+        }
+    })
+</script>
+<!-- pencil, rect & line wala code -->
+<script>
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+    let iX, iY, fX, fY;
+    let drawingMode = false;
+
+    body.addEventListener("mousedown",
+
+        function(e) {
+            iX = e.clientX - boardLeft;
+            iY = e.clientY - boardTop;
+            if (currTool == "pencil") {
+                drawingMode = true;
+                tool.beginPath();
+                tool.moveTo(iX, iY);
+            }
+        })
+    body.addEventListener("mouseup",
+        function(e) {
+            if (currTool == "pencil") {
+                drawingMode = false;
+            } else {
+                // rect, line
+                fX = e.clientX + boardLeft;
+                fY = e.clientY - boardTop;
+                let width = fX - iX;
+                let height = fY - iY;
+                if (currTool == "rect") {
+                    tool.strokeRect(iX, iY, width, height);
+
+                } else {
+                    tool.beginPath();
+                    tool.moveTo(iX, iY);
+                    tool.lineTo(fX, fY);
+                    tool.stroke();
+                }
+
+            }
+        })
+    body.addEventListener("mousemove",
+        function(e) {
+            if (drawingMode == false) {
+                return;
+            }
+            if (currTool == "pencil") {
+
+            }
+            fX = e.clientX - boardLeft;
+            fY = e.clientY - boardTop;
+
+            tool.lineTo(fX, fY);
+            tool.stroke();
+            iX = fX;
+            iY = fY;
+        })
+</script>
+<!-- color change -->
+<script>
+    let redColor = document.querySelector(".red");
+    let greenColor = document.querySelector(".green");
+    let blueColor = document.querySelector(".blue");
+
+    redColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightpink";
+        })
+    greenColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightgreen";
+        })
+    blueColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightblue";
+        })
+</script>
 
 </html>
