@@ -32,7 +32,29 @@
     top -> vertical distance from top-left corner
     left -> horizontal distance from top-left corner
 
-|-----------------*menu.html-------------------------------------------
+
+
+
+
+
+
+
+
+|-----------------*index.html*-------------------------------------------
+|
+|       /* html */       
+|   * 
+|   
+|       /* CSS */
+|   * 
+|   * 
+|   * 
+|
+|---------------------------------------------------------------------------
+
+
+
+|-----------------*menu.html*----------------------------------------------------------------
 |
 |       /* html */
 |   * we have page then,
@@ -43,6 +65,11 @@
 |   * then made divs depending in thought process
 |   * having container of different colors
 |   * tool -> tool -> tool -> color-container
+|   * Replace the icon with suitable one
+|   * Put all the necessary code
+|   * Added color wala logic
+|   * Then put all if-else of pencil, rect, & line
+|
 |
 |       /* CSS */
 |   * have to justify hozrizontally in center
@@ -52,8 +79,29 @@
 |   * if want to change image size then change give height to image directly by creating class over them
 |   * height, width, bordr-radius must be same in every color symbol
 |   * the good practice is to give class to every element.
+|
+|   PROPERTIES  |    pencil  |    rect   |   line
+|   ------------|------------|-----------|--------
+|   mousedown   |     y      |    y      |    y
+|   mouseup     |     y      |    y      |    y
+|   mousemove   |     y      |    n      |    n
+|
+|-----------------------------------------------------------------------------------------------
 
 
+|-----------------*options.html*-------------------------------------------
+|
+|       /* html */       
+|   * think of a area in which the options would come over
+|   * then make a div class of the size
+|   * then make different div classes of the different size circle
+|   
+|       /* CSS */
+|   * define the heighth width of the box
+|   * define the height, width, border-radius and colour of circles to be drawn
+|   * align, justify and flex them
+|
+|---------------------------------------------------------------------------
 
 
 
