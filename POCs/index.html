@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+
+    <style>
+        body {
+            margin: 0px;
+        }
+        
+        .fas {
+            font-size: 2rem;
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+        
+        .red {
+            background-color: lightpink;
+            width: 40px;
+            height: 40px;
+            /* curve */
+            border-radius: 50%;
+        }
+        
+        .green {
+            background-color: lightgreen;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .blue {
+            background-color: lightblue;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .icon-pallet {
+            background-color: lightgray;
+            height: 50px;
+            width: 500px;
+            margin-left: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- <h1>Canvas Example</h1> -->
+    <div class="icon-pallet">
+        <i class="fas fa-square"></i>
+        <i class="fas fa-grip-lines-vertical"></i>
+        <i class="fas fa-pencil"></i>
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+    <!-- drawing board -->
+    <canvas></canvas>
+</body>
+<!-- HTML js inject -->
+<script>
+    // to select anything from html we use querySelector
+    let canvasBoard = document.querySelector("canvas");
+    let rectTool = document.querySelector(".fa-square");
+    let lineTool = document.querySelector(".fa-grip-lines-vertical");
+    let pencilTool = document.querySelector(".fa-pencil");
+    let body = document.querySelector("body");
+    let redColor = document.querySelector(".red");
+    let greenColor = document.querySelector(".green");
+    let blueColor = document.querySelector(".blue");
+    let currTool = "rectTool";
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+    let iX, iY, fX, fY;
+    // this line gives you tool to draw on canvas
+    let tool = canvasBoard.getContext("2d");
+    // default height width is smaller
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+</script>
+<!-- color change and tool change -->
+<script>
+    // color change logic
+    redColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightpink";
+        })
+    greenColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightgreen";
+        })
+    blueColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "lightblue";
+        })
+
+    // tool change logic
+    rectTool.addEventListener("click", function() {
+        currTool = "rectTool";
+    })
+    lineTool.addEventListener("click", function() {
+        currTool = "lineTool";
+    })
+    pencilTool.addEventListener("click", function() {
+        currTool = "pencilTool";
+    })
+
+
+    // press on the screen
+</script>
+<!-- drawing stuff -->
+<script>
+    body.addEventListener("mousedown",
+        function(e) {
+            iX = e.clientX + boardLeft;
+            iY = e.clientY - boardTop;
+        })
+    body.addEventListener("mousemove", function() {
+        console.log("x", e.clientX);
+        console.log("y", e.clientY);
+    })
+    body.addEventListener("mouseup",
+        function(e) {
+
+            fX = e.clientX + boardLeft;
+            fY = e.clientY - boardTop;
+            let width = fX - iX;
+            let height = fY - iY;
+            if (currTool == "rectTool") {
+                tool.strokeRect(iX, iY, width, height);
+
+            } else if (currTool == "lineTool") {
+                tool.beginPath();
+                tool.moveTo(iX, iY);
+                tool.lineTo(fX, fY);
+                tool.stroke();
+            } else {
+                let drawingMode = false;
+                body.addEventListener("mousedown",
+                    function(e) {
+                        drawingMode = true;
+                        tool.beginPath();
+                        iX = e.clientX - boardLeft;
+                        iY = e.clientY - boardTop;
+                        tool.moveTo(iX, iY);
+
+                    })
+                body.addEventListener("mouseup",
+                    function(e) {
+                        drawingMode = false;
+                    })
+                body.addEventListener("mousemove",
+                    function(e) {
+                        if (drawingMode == false) {
+                            return;
+                        }
+                        fX = e.clientX - boardLeft;
+                        fY = e.clientY - boardTop;
+
+                        tool.lineTo(fX, fY);
+                        tool.stroke();
+                        iX = fX;
+                        iY = fY;
+                    })
+            }
+
+        })
+</script>
+<!-- pencil -->
+<!-- <script>
+    let body = document.querySelector("body");
+    let canvasBoard = document.querySelector("canvas");
+    let tool = canvasBoard.getContext("2d");
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+    let iX, iY, fX, fY;
+    let drawingMode = false;
+    body.addEventListener("mousedown",
+        function(e) {
+            drawingMode = true;
+            tool.beginPath();
+            iX = e.clientX - boardLeft;
+            iY = e.clientY - boardTop;
+            tool.moveTo(iX, iY);
+
+        })
+    body.addEventListener("mouseup",
+        function(e) {
+            drawingMode = false;
+        })
+    body.addEventListener("mousemove",
+        function(e) {
+            if (drawingMode == false) {
+                return;
+            }
+            fX = e.clientX - boardLeft;
+            fY = e.clientY - boardTop;
+
+            tool.lineTo(fX, fY);
+            tool.stroke();
+            iX = fX;
+            iY = fY;
+        })
+</script> -->
+
+</html>

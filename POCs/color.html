@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color</title>
+    <style>
+        /* body {
+            border: 1px solid blue;
+        }
+        
+        html {
+            border: 1px solid grey;
+        } */
+        
+        div {
+            border: 1px solid green;
+            /* background-color: lightpink; */
+        }
+        
+        .outer {
+            border: 3px solid purple;
+            width: 200px;
+            height: 60px;
+            display: flex;
+            /* vertically align */
+            align-items: center;
+            /* horizontally align */
+            justify-content: space-evenly;
+        }
+        
+        .red {
+            background-color: lightpink;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .green {
+            background-color: lightgreen;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .blue {
+            background-color: lightblue;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .color-area {
+            border: 1px solid grey;
+            height: 50px;
+            width: 50px;
+            margin-left: 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+    <div class="color-area"></div>
+</body>
+<script>
+    let colorArea = document.querySelector(".color-area");
+    let greenColor = document.querySelector("green");
+    let blueColor = document.querySelector("blue");
+    let redColor = document.querySelector("red");
+
+    let currClick = "blueColor";
+    redColor.addEventListener("click",
+        function() {
+            if (currClick == "redClor")
+                colorArea.style.backgroundColor = "linghtpink";
+        })
+    greenColor.addEventListener("click",
+        function() {
+            if (currClick == "greenColor")
+                colorArea.style.backgroundColor = "lightgreen";
+        })
+    blueColor.addEventListener("click",
+        function() {
+            if (currClick == "blueColor")
+                colorArea.style.backgroundColor = "lightblue";
+        })
+</script>
+
+</html>
