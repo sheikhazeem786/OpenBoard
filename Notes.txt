@@ -97,6 +97,23 @@
 |   * think of a area in which the options would come over
 |   * then make a div class of the size
 |   * then make different div classes of the different size circle
+|   * event bubbling is implemented
+|   * addEventListener is called w.r.t parent class 
+|   * if clicked on the dot i.e. -> e.target ->  actual event occur || <div class="size1 size"></div>
+|   * if clicked on the box i.e. -> e.currentTarget = -> event Listener (parent)
+|   *    <div class="box-size">
+|   *        <div class="size1 size"></div>
+|   *        <div class="size2 size"></div>
+|   *        <div class="size3 size"></div>
+|   *        <div class="size4 size"></div>
+|   *    </div>
+|   * as shown above the classes name, we have to make an array as -> ["size1", "size2", "size3", "size4"];
+|   * then obtain the classes of clicked target as -> e.target.classList; 
+|   * as the different classes are on the first words between two so we call the first one as -> alltheClasses[0];
+|   * then check if the clicked dot class is available in the saved array as -> elements.includes(firstClass);
+|   * then we go with the different logics of different sizes
+|
+|
 |   
 |       /* CSS */
 |   * define the heighth width of the box
