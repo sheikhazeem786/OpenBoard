@@ -1,0 +1,100 @@
+.toolbar {
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: flex;
+    width: 90vw;
+    height: 80px;
+    /* trick to center element */
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.tool {
+    /* border: 1px solid green; */
+    height: 50px;
+}
+
+.tool-img {
+    /* border: 1px solid red; */
+    height: 50px;
+}
+
+.color-container {
+    border: 1px solid gray;
+    border-radius: 3px;
+    display: flex;
+    height: 50px;
+    width: 150px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.color {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    /* background-color: aqua; */
+}
+
+.red {
+    background-color: lightpink;
+}
+
+.green {
+    background-color: lightgreen;
+}
+
+.blue {
+    background-color: lightblue;
+}
+
+.white {
+    background-color: white;
+    border: 1px solid black;
+}
+
+
+/* tool options */
+
+.box-size {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid grey;
+    display: none;
+}
+
+.size {
+    border-radius: 50%;
+    background-color: lightgrey;
+}
+
+.size1 {
+    height: 10px;
+    width: 10px;
+}
+
+.size2 {
+    height: 14px;
+    width: 14px;
+}
+
+.size3 {
+    height: 18px;
+    width: 18px;
+}
+
+.size4 {
+    height: 22px;
+    width: 22px;
+}
+
+
+/* icons */
+
+.fas {
+    font-size: 2rem;
+}

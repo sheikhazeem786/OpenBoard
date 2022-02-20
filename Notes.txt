@@ -69,7 +69,9 @@
 |   * Put all the necessary code
 |   * Added color wala logic
 |   * Then put all if-else of pencil, rect, & line
-|
+|   * Canvas ki height width set kre k baad jo aap changes kroge wahi reflect hoga
+|   * Update the eraser with the properties of pencil using or(||)
+|   * Change tool.strokeStyle to white
 |
 |       /* CSS */
 |   * have to justify hozrizontally in center

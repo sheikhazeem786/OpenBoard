@@ -54,6 +54,7 @@
             <div class="color red"></div>
             <div class="color green"></div>
             <div class="color blue"></div>
+            <div class="color white"></div>
         </div>
     </div>
     <canvas></canvas>
@@ -64,6 +65,7 @@
     let body = document.querySelector("body");
     let tool = canvasBoard.getContext("2d");
     let currTool = "pencil";
+
     let pencil = document.querySelector("#pencil");
     let eraser = document.querySelector("#eraser ");
     let rect = document.querySelector("#rect");
@@ -71,6 +73,7 @@
     let options = document.querySelectorAll(".box-size");
     canvasBoard.height = window.innerHeight;
     canvasBoard.width = window.innerWidth;
+    tool.strokeStyle = "red";
 </script>
 <!-- call event listener -->
 <script>
@@ -86,6 +89,7 @@
             }
             // pencil.style.border = "1px solid red";
             currTool = "pencil";
+            tool.strokeStyle = "red";
         }
     })
     eraser.addEventListener("click", function(e) {
@@ -100,6 +104,7 @@
             //first click
             // eraser.style.border = "1px solid red";
             currTool = "eraser";
+            tool.strokeStyle = "white";
         }
     })
     rect.addEventListener("click", function(e) {
@@ -114,6 +119,7 @@
             //first click
             // rect.style.border = "1px solid red";
             currTool = "rect";
+            tool.strokeStyle = "red";
         }
     })
     line.addEventListener("click", function(e) {
@@ -128,6 +134,7 @@
             // line.style.border = "1px solid red";
             //first click
             currTool = "line";
+            tool.strokeStyle = "red";
         }
     })
 </script>
@@ -143,49 +150,50 @@
         function(e) {
             iX = e.clientX - boardLeft;
             iY = e.clientY - boardTop;
-            if (currTool == "pencil") {
+            if (currTool == "pencil" || currTool == "eraser") {
                 drawingMode = true;
                 tool.beginPath();
                 tool.moveTo(iX, iY);
             }
         })
     body.addEventListener("mouseup",
-        function(e) {
-            if (currTool == "pencil") {
-                drawingMode = false;
-            } else {
-                // rect, line
-                fX = e.clientX + boardLeft;
-                fY = e.clientY - boardTop;
-                let width = fX - iX;
-                let height = fY - iY;
-                if (currTool == "rect") {
-                    tool.strokeRect(iX, iY, width, height);
-
+            function(e) {
+                if (currTool == "pencil" || currTool == "eraser") {
+                    drawingMode = false;
                 } else {
-                    tool.beginPath();
-                    tool.moveTo(iX, iY);
-                    tool.lineTo(fX, fY);
-                    tool.stroke();
-                }
+                    // rect, line
+                    fX = e.clientX + boardLeft;
+                    fY = e.clientY - boardTop;
+                    let width = fX - iX;
+                    let height = fY - iY;
+                    if (currTool == "rect") {
+                        tool.strokeRect(iX, iY, width, height);
 
-            }
-        })
+                    } else if (currTool == "line") {
+                        tool.beginPath();
+                        tool.moveTo(iX, iY);
+                        tool.lineTo(fX, fY);
+                        tool.stroke();
+                    }
+
+                }
+            })
+        // pencil
     body.addEventListener("mousemove",
         function(e) {
             if (drawingMode == false) {
                 return;
             }
-            if (currTool == "pencil") {
+            if (currTool == "pencil" || currTool == "eraser") {
+                fX = e.clientX - boardLeft;
+                fY = e.clientY - boardTop;
+
+                tool.lineTo(fX, fY);
+                tool.stroke();
+                iX = fX;
+                iY = fY;
 
             }
-            fX = e.clientX - boardLeft;
-            fY = e.clientY - boardTop;
-
-            tool.lineTo(fX, fY);
-            tool.stroke();
-            iX = fX;
-            iY = fY;
         })
 </script>
 <!-- color change -->
@@ -193,6 +201,7 @@
     let redColor = document.querySelector(".red");
     let greenColor = document.querySelector(".green");
     let blueColor = document.querySelector(".blue");
+    let whiteColor = document.querySelector(".white");
 
     redColor.addEventListener("click",
         function() {
@@ -205,6 +214,10 @@
     blueColor.addEventListener("click",
         function() {
             tool.strokeStyle = "lightblue";
+        })
+    whiteColor.addEventListener("click",
+        function() {
+            tool.strokeStyle = "white";
         })
 </script>
 
