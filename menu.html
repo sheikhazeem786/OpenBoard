@@ -60,148 +60,18 @@
     <canvas></canvas>
 </body>
 <!-- variable declare -->
-<script>
-    let canvasBoard = document.querySelector("canvas");
-    let body = document.querySelector("body");
-    let tool = canvasBoard.getContext("2d");
-    let currTool = "pencil";
-
-    let pencil = document.querySelector("#pencil");
-    let eraser = document.querySelector("#eraser ");
-    let rect = document.querySelector("#rect");
-    let line = document.querySelector("#line");
-    let options = document.querySelectorAll(".box-size");
-    canvasBoard.height = window.innerHeight;
-    canvasBoard.width = window.innerWidth;
-    tool.strokeStyle = "red";
-</script>
+<script src="setup.js"></script>
 <!-- call event listener -->
-<script>
-    pencil.addEventListener("click", function(e) {
-        if (currTool == "pencil") {
-            //second click
-            //options show
-            options[0].style.display = "flex";
-        } else {
-            //first click
-            for (let i = 0; i < options.length; i++) {
-                options[i].style.display = "none";
-            }
-            // pencil.style.border = "1px solid red";
-            currTool = "pencil";
-            tool.strokeStyle = "red";
-        }
-    })
-    eraser.addEventListener("click", function(e) {
-        if (currTool == "eraser") {
-            //second click
-            //options show
-            options[1].style.display = "flex";
-        } else {
-            for (let i = 0; i < options.length; i++) {
-                options[i].style.display = "none";
-            }
-            //first click
-            // eraser.style.border = "1px solid red";
-            currTool = "eraser";
-            tool.strokeStyle = "white";
-        }
-    })
-    rect.addEventListener("click", function(e) {
-        if (currTool == "rect") {
-            //second click
-            //options show
-            options[2].style.display = "flex";
-        } else {
-            for (let i = 0; i < options.length; i++) {
-                options[i].style.display = "none";
-            }
-            //first click
-            // rect.style.border = "1px solid red";
-            currTool = "rect";
-            tool.strokeStyle = "red";
-        }
-    })
-    line.addEventListener("click", function(e) {
-        if (currTool == "line") {
-            //second click
-            //options show
-            options[3].style.display = "flex";
-        } else {
-            for (let i = 0; i < options.length; i++) {
-                options[i].style.display = "none";
-            }
-            // line.style.border = "1px solid red";
-            //first click
-            currTool = "line";
-            tool.strokeStyle = "red";
-        }
-    })
+<script src="toolManipulation.js">
 </script>
-<!-- pencil, rect & line wala code -->
-<script>
-    let boardTop = canvasBoard.getBoundingClientRect().top;
-    let boardLeft = canvasBoard.getBoundingClientRect().left;
-    let iX, iY, fX, fY;
-    let drawingMode = false;
-
-    body.addEventListener("mousedown",
-
-        function(e) {
-            iX = e.clientX - boardLeft;
-            iY = e.clientY - boardTop;
-            if (currTool == "pencil" || currTool == "eraser") {
-                drawingMode = true;
-                tool.beginPath();
-                tool.moveTo(iX, iY);
-            }
-        })
-    body.addEventListener("mouseup",
-            function(e) {
-                if (currTool == "pencil" || currTool == "eraser") {
-                    drawingMode = false;
-                } else {
-                    // rect, line
-                    fX = e.clientX + boardLeft;
-                    fY = e.clientY - boardTop;
-                    let width = fX - iX;
-                    let height = fY - iY;
-                    if (currTool == "rect") {
-                        tool.strokeRect(iX, iY, width, height);
-
-                    } else if (currTool == "line") {
-                        tool.beginPath();
-                        tool.moveTo(iX, iY);
-                        tool.lineTo(fX, fY);
-                        tool.stroke();
-                    }
-
-                }
-            })
-        // pencil
-    body.addEventListener("mousemove",
-        function(e) {
-            if (drawingMode == false) {
-                return;
-            }
-            if (currTool == "pencil" || currTool == "eraser") {
-                fX = e.clientX - boardLeft;
-                fY = e.clientY - boardTop;
-
-                tool.lineTo(fX, fY);
-                tool.stroke();
-                iX = fX;
-                iY = fY;
-
-            }
-        })
+<!-- pencil, eraser, rect & line wala code -->
+<script src="draw.js">
 </script>
 <!-- color change -->
 <script>
     let redColor = document.querySelector(".red");
     let greenColor = document.querySelector(".green");
     let blueColor = document.querySelector(".blue");
-    let whiteColor = document.querySelector(".white");
 
     redColor.addEventListener("click",
         function() {
@@ -214,10 +84,6 @@
     blueColor.addEventListener("click",
         function() {
             tool.strokeStyle = "lightblue";
-        })
-    whiteColor.addEventListener("click",
-        function() {
-            tool.strokeStyle = "white";
         })
 </script>
 
