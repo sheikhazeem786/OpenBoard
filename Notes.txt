@@ -40,16 +40,41 @@
 
 
 
-|-----------------*index.html*-------------------------------------------
+|-----------------*sticky.html*-------------------------------------------
+|
+|   |---------------------------------|
+|   |  //navbar                  -  x | 
+|   |---------------------------------|
+|   |  //textarea                     |
+|   |                                 |
+|   |    type                         |
+|   |      Something                  |
+|   |                                 |
+|   |---------------------------------|
 |
 |       /* html */       
-|   * 
+|   * make a div class of .sticky
+|   * then make a div class of .navbar in which classes of .minimize & .close
+|   * then make a div class of textarea .textarea
 |   
 |       /* CSS */
-|   * 
-|   * 
-|   * 
+|   * Make a transparent border sticky with height and width
+|   * give box shadow to navbar and textarea
+|   * give suitable settings to different elements
 |
+|       /* script */
+|   * Make an addEventListener on sticky
+|   * then create div element by createElement
+|   * then set attribute as class in sticky by sticky.setAttribute("class", "sticky")
+|   * then put all the html code for stickyNotes using sticky.innerHTML
+|   * then append the sticky in body use -> body.appendChild(sticky);
+|   * then make querySelectors for both minimize, close and textarea
+|   * then initialize isClosed=false for staying the Notes
+|   * then call for both addEventListener
+|   * if isClosed==false then state -> textArea.style.display = "none";
+|   * else state -> textArea.style.display = "block";
+|   * then isClosed = !isClosed for
+    * to close the stickyNotes -> sticky.remove();
 |---------------------------------------------------------------------------
 
 
